@@ -1,4 +1,5 @@
 import PostTeaserBody from "./PostTeaserBody";
+import PostTeaserLink from "./PostTeaserLink";
 import PostTeaserTitle from "./PostTeaserTitle";
 
 export default function PostTeaser({ post }) {
@@ -7,7 +8,7 @@ export default function PostTeaser({ post }) {
     <div className="rounded mb-4">
       <PostTeaserTitle post={post} />
       <PostTeaserBody brief={brief} />
-      {/* <PostTeaserLink post={post} /> */}
+      <PostTeaserLink post={post} />
     </div>
   );
 }

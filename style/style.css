@@ -5,7 +5,7 @@ body {
   color: white;
 }
 a {
-  /* color: red; */
+  color: red;
 }
 a:hover {
   text-decoration: underline;

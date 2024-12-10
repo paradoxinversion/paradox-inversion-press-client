@@ -1,7 +1,7 @@
 import React from "react";
 import SidebarNavButton from "./SidebarNavButton";
+
 const Sidebar = ({ pages }) => {
-  console.log(pages);
   return (
     <div id="sidebar" className="sidebar ">
       {pages ? (
