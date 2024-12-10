@@ -2,8 +2,12 @@
   "compilerOptions": {
     "baseUrl": "src/",
     "paths": {
-      "@/styles/*": ["styles/*"],
-      "@/components/*": ["components/*"]
+      "@/styles/*": [
+        "styles/*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ]
     },
     "target": "ES2017",
     "lib": [
@@ -26,14 +30,15 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/page.tsx.bak"  ],
   "exclude": [
     "node_modules"
   ]

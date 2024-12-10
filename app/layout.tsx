@@ -1,4 +1,4 @@
-import "./globals.css";
+// import "./globals.css";
 import type { Metadata } from "next";
 import Logo from "@/components/Logo";
 import MainFooter from "@/components/MainFooter";
