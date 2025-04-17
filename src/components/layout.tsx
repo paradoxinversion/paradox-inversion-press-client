@@ -16,10 +16,8 @@ const Layout = ({ children }) => {
     <div className="flex flex-col min-h-screen p-4">
       <Logo />
       <div className="flex h-full flex-grow">
-        <div className="w-2/12 mr-4">
-          <Sidebar pages={pageData} />
-        </div>
-        <div className="flex flex-col flex-grow w-10/12">{children}</div>
+        <Sidebar pages={pageData} />
+        <div className="flex flex-col flex-grow sm:w-3/4">{children}</div>
       </div>
       <MainFooter />
     </div>

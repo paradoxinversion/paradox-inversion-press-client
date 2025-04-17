@@ -7,7 +7,7 @@ import PostTeaserList from "@/components/PostTeaserList";
 const Index = ({ content, posts }) => {
   return (
     <div>
-      <div className="mb-8">
+      <div className="mb-8 pi-content">
         <DocumentRenderer document={content || []} />
       </div>
       <PostTeaserList posts={posts} />

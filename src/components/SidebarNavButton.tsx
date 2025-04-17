@@ -17,7 +17,7 @@ const SidebarNavButton = (props: SidebarNavButtonProps) => {
         router.push(`/${url}`);
       }}
     >
-      <p className="barcode">{barcodeText}</p>
+      <p className="barcode">{props.text}</p>
       <p className="nav-btn">{text}</p>
     </div>
   );

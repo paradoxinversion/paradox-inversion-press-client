@@ -74,6 +74,7 @@ a:hover {
 @layer components {
   .barcode {
     font-family: "Libre Barcode 39", cursive;
+    color: red;
   }
   .barcode--md {
     font-size: 32px;

@@ -3,8 +3,8 @@ import Link from "next/link";
 import { getPostPathParts } from "utils/actions";
 
 const PostTeaserLink = ({ post }) => {
-  const { publishDate, url } = post;
-  const [year, month, day] = getPostPathParts(publishDate);
+  const { publishedAt, url } = post;
+  const [year, month, day] = getPostPathParts(publishedAt);
   return (
     <Link
       href="/post/[year]/[month]/[day]/[slug]"

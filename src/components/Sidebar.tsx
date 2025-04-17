@@ -3,7 +3,7 @@ import SidebarNavButton from "./SidebarNavButton";
 
 const Sidebar = ({ pages }) => {
   return (
-    <div id="sidebar" className="sidebar ">
+    <div id="sidebar" className="sidebar max-w-48 min-w-48 ">
       {pages ? (
         pages
           .filter((page) => page.showInNav)

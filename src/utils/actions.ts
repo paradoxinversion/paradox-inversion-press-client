@@ -14,6 +14,9 @@ query Pages {
     title
     showInNav
     url
+    storyCollection {
+      url
+    }
   }
 }
   `;
@@ -32,6 +35,7 @@ export const getPage = async (slug) => {
 query Page($where: PageWhereUniqueInput!) {
   page(where: $where) {
     url
+    title
     content {
       document
     }
@@ -133,6 +137,9 @@ query Posts {
     url
     publishedAt
     brief
+    author {
+      displayName
+    }
   }
 }
   `;
