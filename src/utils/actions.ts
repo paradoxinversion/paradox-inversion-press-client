@@ -36,6 +36,7 @@ query Page($where: PageWhereUniqueInput!) {
   page(where: $where) {
     url
     title
+    pageType
     content {
       document
     }
@@ -210,6 +211,29 @@ export const getSeries = async (slug) => {
   `;
   const series = await axiosInstance.post("/admin/api", { query });
   return series.data.data.allSerials[0];
+};
+
+export const getSeriesPosts = async (slug) => {
+  const query = `
+query SeriesPosts($where: PostWhereInput!) {
+  posts(where: $where) {
+    title
+    publishedAt
+    url
+  }
+}
+  `;
+  const vars = {
+    where: {
+      series: {
+        url: { 
+          equals: slug
+        },
+      }
+    },
+  };
+  const fetchedSeries = await fetchGraphQL(query, vars);
+  return fetchedSeries;
 };
 
 export const getPreviousSerialPartData = (serialPost, serialsArray) => {

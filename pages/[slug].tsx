@@ -1,8 +1,7 @@
 import PostTeaserList from "@/components/PostTeaserList";
 import { DocumentRenderer } from "@keystone-6/document-renderer";
 import { useRouter } from "next/router";
-import { title } from "process";
-import { getPage, getPages } from "utils/actions";
+import { getPage, getPages, getSeriesPosts } from "utils/actions";
 
 export default function Page(props) {
   const router = useRouter();
@@ -20,6 +19,9 @@ export default function Page(props) {
       {/* {props.page.pageType !== "standard" && (
         <PostTeaserList searchType="page" query={props.page.url} />
       )} */}
+      {props.pageType === "series" && (
+        <PostTeaserList posts={props.seriesPosts} />
+      )}
     </div>
   );
 }
@@ -34,10 +36,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(ctx) {
   const res = await getPage(ctx.params.slug);
+  const series = await getSeriesPosts(ctx.params.slug);
   return {
     props: {
       title: res.page.title,
       content: res.page.content.document,
+      pageType: res.page.pageType,
+      seriesPosts: series.posts
     },
   };
 }

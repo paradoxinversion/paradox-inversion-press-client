@@ -7,6 +7,5 @@ export const gql = ([content]) => content;
 
 export async function fetchGraphQL(query, variables?) {
   const apiResponse = await axios.post(API_URI, { query, variables });
-  // console.log(apiResponse.data.data);
   return apiResponse.data.data;
 }
