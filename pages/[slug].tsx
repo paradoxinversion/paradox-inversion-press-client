@@ -16,12 +16,6 @@ export default function Page(props) {
       <div className="pi-content">
         <DocumentRenderer document={props.content} />
       </div>
-      {/* {props.page.pageType !== "standard" && (
-        <PostTeaserList searchType="page" query={props.page.url} />
-      )} */}
-      {props.pageType === "series" && (
-        <PostTeaserList posts={props.seriesPosts} />
-      )}
     </div>
   );
 }
