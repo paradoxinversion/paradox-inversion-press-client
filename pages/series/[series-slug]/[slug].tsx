@@ -1,5 +1,5 @@
 import { DocumentRenderer } from "@keystone-6/document-renderer";
-import { getAllPosts, getPost, getPostPathParts } from "utils/actions";
+import { getAllPosts, getPost, getPostPathParts, getSeriesPosts } from "utils/actions";
 import { DateTime } from "luxon";
 import TagList from "@/components/TagList";
 import SeriesStepper from "@/components/SeriesStepper";
@@ -17,7 +17,7 @@ export default function Page(props) {
           DateTime.DATETIME_HUGE
         )}
       </p>
-      <SeriesStepper />
+      <SeriesStepper seriesPosts={props.seriesPosts} seriesUrl={props.post.series.url} />
       <hr className="mb-4" />
       <div className="flex-grow flex flex-col lg:flex-row">
         <div className="pi-content flex-grow max-w-prose mx-auto">
@@ -46,6 +46,7 @@ export async function getStaticPaths() {
     return {
       params: {
         slug: post.url,
+        "series-slug": post.series?.url || "",
         year: year.toString(),
         month: month.toString(),
         day: day.toString(),
@@ -57,9 +58,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(ctx) {
   const pagePost = await getPost(ctx.params.slug);
+  const seriesPosts = await getSeriesPosts(pagePost.post.series?.url);
+  console.log("seriesPosts", seriesPosts);
   return {
     props: {
       post: pagePost.post,
+      seriesPosts: seriesPosts.posts || [],
     },
   };
 }
