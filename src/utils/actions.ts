@@ -95,6 +95,9 @@ query Post($where: PostWhereUniqueInput!) {
     }
     url
     postType
+    series {
+      url
+    }
   }
 }
   `;
@@ -141,6 +144,9 @@ query Posts {
     postType
     author {
       displayName
+    }
+    series {
+      url
     }
   }
 }
@@ -221,6 +227,7 @@ query SeriesPosts($where: PostWhereInput!) {
     title
     publishedAt
     url
+    seriesOrder
   }
 }
   `;
