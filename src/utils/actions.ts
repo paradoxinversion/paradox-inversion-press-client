@@ -94,6 +94,7 @@ query Post($where: PostWhereUniqueInput!) {
       displayName
     }
     url
+    postType
   }
 }
   `;
@@ -138,6 +139,7 @@ query Posts {
     url
     publishedAt
     brief
+    postType
     author {
       displayName
     }
@@ -304,3 +306,12 @@ export const getPostPathParts = (postDate) => {
 
   return [year, month, day];
 };
+
+export const getPostUrl = (post) => {
+  if (post.postType === "series") {
+    return `/series/${post.url}`;
+  } else {
+    const [year, month, day] = getPostPathParts(post.publishedAt);
+    return `/post/${year}/${month}/${day}/${post.url}`;
+  }
+}

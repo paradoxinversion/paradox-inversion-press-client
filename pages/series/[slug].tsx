@@ -2,9 +2,10 @@ import { DocumentRenderer } from "@keystone-6/document-renderer";
 import { getAllPosts, getPost, getPostPathParts } from "utils/actions";
 import { DateTime } from "luxon";
 import TagList from "@/components/TagList";
+import SeriesStepper from "@/components/SeriesStepper";
 
-/**
- * A page component that renders a standalone post.
+/***
+ * A page component that renders a series post.
  */
 export default function Page(props) {
   return (
@@ -16,6 +17,7 @@ export default function Page(props) {
           DateTime.DATETIME_HUGE
         )}
       </p>
+      <SeriesStepper />
       <hr className="mb-4" />
       <div className="flex-grow flex flex-col lg:flex-row">
         <div className="pi-content flex-grow max-w-prose mx-auto">
