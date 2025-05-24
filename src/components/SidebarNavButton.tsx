@@ -14,7 +14,7 @@ const SidebarNavButton = (props: SidebarNavButtonProps) => {
     <div
       className="cursor-pointer w-full mb-2 p-2 hover:bg-gray-400"
       onClick={() => {
-        router.push(`/${url}`);
+        router.push(`/page/${url}`);
       }}
     >
       <p className="barcode">{props.text}</p>
