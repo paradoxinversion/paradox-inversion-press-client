@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getPostPathParts } from "utils/actions";
 
 const PostTeaserLink = ({ post }) => {
-  const { publishedAt, url, postType } = post;
+  const { publishedAt, url, postType, series } = post;
   const [year, month, day] = getPostPathParts(publishedAt);
   const renderStandalonePost = () => (
     <Link
@@ -15,7 +15,7 @@ const PostTeaserLink = ({ post }) => {
   );
 
   const renderSeriesPost = () => (
-    <Link href={`/series/${url}`} className="post-teaser__title">
+    <Link href={`/series/${series.url}/${url}`} className="post-teaser__title">
       Read It
     </Link>
   );
