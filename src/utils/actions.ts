@@ -104,7 +104,6 @@ query Post($where: PostWhereUniqueInput!) {
     },
   };
   const post = await fetchGraphQL(query, vars);
-  console.log(post);
   return post;
 };
 
