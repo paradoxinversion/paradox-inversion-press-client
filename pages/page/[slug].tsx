@@ -1,10 +1,8 @@
 import PostTeaserList from "@/components/PostTeaserList";
 import { DocumentRenderer } from "@keystone-6/document-renderer";
-import { useRouter } from "next/router";
 import { getPage, getPages, getSeriesPosts } from "utils/actions";
 
 export default function Page(props) {
-  const router = useRouter();
   return (
     <div>
       <h1 className="pi-header--text text-center sm:text-left">
