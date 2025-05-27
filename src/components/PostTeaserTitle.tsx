@@ -1,14 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import { getPostPathParts } from "utils/actions";
+import { formatPostPath, formatSeriesPostPath } from "utils/actions";
 
 export default function PostTeaserTitle({ post }) {
   const { publishedAt, url, title, postType, series } = post;
-  const [year, month, day] = getPostPathParts(publishedAt);
   const renderStandalonePost = () => (
     <Link
       href="/post/[year]/[month]/[day]/[slug]"
-      as={`/post/${year}/${month}/${day}/${url}`}
+      as={formatPostPath(publishedAt, url)}
       className="post-teaser__title text-3xl"
     >
       {title}
@@ -16,7 +15,10 @@ export default function PostTeaserTitle({ post }) {
   )
 
   const renderSeriesPost = () => (
-    <Link href={`/series/${series.url}/${url}`} className="post-teaser__title text-3xl">
+    <Link 
+      href={`/series/[series-slug]/[slug]`} className="post-teaser__title text-3xl"
+      as={formatSeriesPostPath(series.url, url)}
+    >
       {title}
     </Link>
   );
@@ -25,5 +27,4 @@ export default function PostTeaserTitle({ post }) {
       {postType === "series" ? renderSeriesPost() : renderStandalonePost()}
     </div>
   )
-
 }
