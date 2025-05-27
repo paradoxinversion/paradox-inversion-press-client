@@ -95,9 +95,12 @@ query Post($where: PostWhereUniqueInput!) {
     }
     url
     postType
+    seriesOrder
     series {
       url
+      seriesPostsCount
     }
+
   }
 }
   `;
@@ -147,6 +150,7 @@ query Posts {
     }
     series {
       url
+      seriesPostsCount
     }
   }
 }
@@ -254,6 +258,7 @@ export const getPreviousSerialPartData = (serialPost, serialsArray) => {
     }
   }
 };
+
 export const getNextSerialPartData = (serialPost, serialsArray) => {
   if (serialPost.seriesOrder < serialsArray.length) {
     const index = serialsArray.findIndex(
@@ -298,6 +303,10 @@ export const formatPostPath = (postDate, slug) => {
   const year = d.getFullYear();
 
   return `/post/${year}/${month}/${day}/${slug}`;
+};
+
+export const formatSeriesPostPath = (seriesSlug, postSlug) => {
+  return `/series/${seriesSlug}/${postSlug}`;
 };
 
 /**
