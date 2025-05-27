@@ -2,6 +2,7 @@ import { DocumentRenderer } from "@keystone-6/document-renderer";
 import { getAllPosts, getPost, getPostPathParts, getSeriesPosts } from "utils/actions";
 import { DateTime } from "luxon";
 import TagList from "@/components/TagList";
+import SeriesPartSelect from "@/components/SeriesPartSelect";
 import SeriesStepper from "@/components/SeriesStepper";
 
 /***
@@ -10,19 +11,24 @@ import SeriesStepper from "@/components/SeriesStepper";
 export default function Page(props) {
   return (
     <div>
-      <h1 className="pi-header--text">{props.post.title}</h1>
+      <section className="flex flex-row justify-between">
+
+        <h1 className="pi-header--text">{props.post.title}</h1>
+        <SeriesPartSelect seriesPosts={props.seriesPosts} series={props.post.series} />
+      </section>
       {props.post.author && <p>By {props.post.author.displayName}</p>}
       <p className="italic mb-4">
         {DateTime.fromISO(props.post.publishedAt).toLocaleString(
           DateTime.DATETIME_HUGE
         )}
       </p>
-      <SeriesStepper seriesPosts={props.seriesPosts} seriesUrl={props.post.series.url} />
+      
       <hr className="mb-4" />
       <div className="flex-grow flex flex-col lg:flex-row">
         <div className="pi-content flex-grow max-w-prose mx-auto">
           <DocumentRenderer document={props.post.content.document} />
         </div>
+        {/* <SeriesStepper seriesPosts={props.seriesPosts} series={props.post.series} currentPart={props.post.seriesOrder}/> */}
       </div>
       <hr className="my-4" />
       <footer id="post-footer" className="mb-4">
@@ -39,6 +45,7 @@ export default function Page(props) {
     </div>
   );
 }
+
 export async function getStaticPaths() {
   const allPosts = await getAllPosts();
   const paths = allPosts.map((post) => {
@@ -59,7 +66,6 @@ export async function getStaticPaths() {
 export async function getStaticProps(ctx) {
   const pagePost = await getPost(ctx.params.slug);
   const seriesPosts = await getSeriesPosts(pagePost.post.series?.url);
-  console.log("seriesPosts", seriesPosts);
   return {
     props: {
       post: pagePost.post,
