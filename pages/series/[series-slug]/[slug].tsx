@@ -3,7 +3,6 @@ import { getAllPosts, getPost, getPostPathParts, getSeriesPosts } from "utils/ac
 import { DateTime } from "luxon";
 import TagList from "@/components/TagList";
 import SeriesPartSelect from "@/components/SeriesPartSelect";
-import SeriesStepper from "@/components/SeriesStepper";
 
 /***
  * A page component that renders a series post.

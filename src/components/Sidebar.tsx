@@ -7,7 +7,7 @@ const Sidebar = ({ pages }) => {
       {pages ? (
         pages
           .filter((page) => page.showInNav)
-          .map((page, index) => (
+          .map((page) => (
             <SidebarNavButton
               key={`page-${page.url}`}
               text={page.title}

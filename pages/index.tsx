@@ -1,6 +1,6 @@
 import { DocumentRenderer } from "@keystone-6/document-renderer";
-import { getHomePage, getPages, queryPosts } from "../src/utils/actions";
-import React, { useEffect } from "react";
+import { getHomePage, queryPosts } from "../src/utils/actions";
+import React from "react";
 import PostTeaserList from "@/components/PostTeaserList";
 
 // Home Page

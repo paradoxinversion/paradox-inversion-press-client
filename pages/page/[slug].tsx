@@ -1,4 +1,3 @@
-import PostTeaserList from "@/components/PostTeaserList";
 import { DocumentRenderer } from "@keystone-6/document-renderer";
 import { getPage, getPages, getSeriesPosts } from "utils/actions";
 
