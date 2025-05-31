@@ -77,6 +77,7 @@ export async function getStaticProps(ctx) {
         post: pagePost.post,
         seriesPosts: seriesPosts.posts || [],
       },
+      revalidate: 60, // Revalidate every 60 seconds
     };
   } catch (e) {
     console.error("Error fetching post:", e);
@@ -87,6 +88,7 @@ export async function getStaticProps(ctx) {
         // Provide error details for debugging
         error: { name: (e as Error).name, message: (e as Error).message },
       },
+      revalidate: 60, // Revalidate every 60 seconds
     };
   }
 }

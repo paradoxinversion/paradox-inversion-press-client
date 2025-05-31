@@ -43,6 +43,7 @@ export async function getStaticProps(ctx) {
         pageType: res.page.pageType,
         seriesPosts: series.posts
       },
+      revalidate: 60, // Revalidate every 60 seconds
     };
   } catch (e){
     return {
@@ -54,6 +55,7 @@ export async function getStaticProps(ctx) {
         // Provide error details for debugging
         error: { name: (e as Error).name, message: (e as Error).message },
       },
+      revalidate: 60, // Revalidate every 60 seconds
     }
   }
 }

@@ -23,6 +23,7 @@ export async function getStaticProps() {
         content: res.page.content.document,
         posts,
       },
+      revalidate: 60, // Revalidate every 60 seconds
     };
   } catch (e) {
     console.error("Error fetching static props:", e);
@@ -32,6 +33,7 @@ export async function getStaticProps() {
         posts: [],
         error: { name: (e as Error).name, message: (e as Error).message },
       },
+      revalidate: 60, // Revalidate every 60 seconds
     };
   }
 }
