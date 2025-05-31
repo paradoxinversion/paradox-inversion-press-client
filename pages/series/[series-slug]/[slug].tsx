@@ -47,7 +47,7 @@ export default function Page(props) {
 
 export async function getStaticPaths() {
   try {
-    const allPosts = await getAllPosts();
+    const allPosts = await getAllPosts(true);
     const paths = allPosts.filter((post) => post.series !== null).map((post) => {
       const [year, month, day] = getPostPathParts(post.publishedAt);
       return {
@@ -70,8 +70,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(ctx) {
   const slug = ctx.params.slug;
   try {
-    const pagePost = await getPost(slug);
-    const seriesPosts = await getSeriesPosts(pagePost.post.series?.url);
+    const pagePost = await getPost(slug, true);
+    const seriesPosts = await getSeriesPosts(pagePost.post.series?.url, true);
     return {
       props: {
         post: pagePost.post,

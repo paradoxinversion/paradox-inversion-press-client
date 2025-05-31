@@ -5,7 +5,7 @@ import axiosInstance from "./axiosInstance";
  * Get all pages. The user will only see pages that are not
  * 'published' if they are logged in due to access control.
  */
-export const getPages = async () => {
+export const getPages = async (build?) => {
   const query = `
 query Pages {
   pages {
@@ -20,7 +20,7 @@ query Pages {
   }
 }
   `;
-  const fetchedPages = await fetchGraphQL(query);
+  const fetchedPages = await fetchGraphQL(query, undefined, build);
   return fetchedPages;
 };
 
@@ -30,7 +30,7 @@ query Pages {
  * error
  * @param {String} slug - The slugified URL of the page
  */
-export const getPage = async (slug) => {
+export const getPage = async (slug, build?) => {
   const query = `
 query Page($where: PageWhereUniqueInput!) {
   page(where: $where) {
@@ -48,11 +48,11 @@ query Page($where: PageWhereUniqueInput!) {
       url: slug,
     },
   };
-  const pages = await fetchGraphQL(query, vars);
+  const pages = await fetchGraphQL(query, vars, build);
   return pages;
 };
 
-export const getHomePage = async () => {
+export const getHomePage = async (build?) => {
   const query = `
 query Page($where: PageWhereUniqueInput!) {
   page(where: $where) {
@@ -70,7 +70,7 @@ query Page($where: PageWhereUniqueInput!) {
       title: "Home",
     },
   };
-  const homePage = await fetchGraphQL(query, vars);
+  const homePage = await fetchGraphQL(query, vars, build);
   return homePage;
 };
 /**
@@ -78,7 +78,7 @@ query Page($where: PageWhereUniqueInput!) {
  * is logged in.
  * @param {*} slug - The slugified title of the post
  */
-export const getPost = async (slug) => {
+export const getPost = async (slug, build?) => {
   const query = `
 query Post($where: PostWhereUniqueInput!) {
   post(where: $where) {
@@ -109,7 +109,7 @@ query Post($where: PostWhereUniqueInput!) {
       url: slug,
     },
   };
-  const post = await fetchGraphQL(query, vars);
+  const post = await fetchGraphQL(query, vars, build);
   return post;
 };
 
@@ -120,10 +120,10 @@ query Post($where: PostWhereUniqueInput!) {
  * @param {*} searchType
  * @param {*} query
  */
-export const queryPosts = async (searchType, query?) => {
+export const queryPosts = async (searchType, query?, build?) => {
   // ! Need Category Search
   if (searchType === "all") {
-    return await getAllPosts();
+    return await getAllPosts(build);
   }
 
   if (searchType === "tagged") {
@@ -135,7 +135,7 @@ export const queryPosts = async (searchType, query?) => {
   }
 };
 
-export const getAllPosts = async () => {
+export const getAllPosts = async (build?) => {
   const query = `
 query Posts {
   posts {
@@ -156,7 +156,7 @@ query Posts {
 }
   `;
 
-  const postData = await fetchGraphQL(query);
+  const postData = await fetchGraphQL(query, undefined, build);
 
   return postData.posts;
 };
@@ -224,7 +224,7 @@ export const getSeries = async (slug) => {
   return series.data.data.allSerials[0];
 };
 
-export const getSeriesPosts = async (slug) => {
+export const getSeriesPosts = async (slug, build?) => {
   const query = `
 query SeriesPosts($where: PostWhereInput!) {
   posts(where: $where) {
@@ -244,7 +244,7 @@ query SeriesPosts($where: PostWhereInput!) {
       }
     },
   };
-  const fetchedSeries = await fetchGraphQL(query, vars);
+  const fetchedSeries = await fetchGraphQL(query, vars, build);
   return fetchedSeries;
 };
 

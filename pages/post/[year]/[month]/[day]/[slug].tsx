@@ -63,7 +63,7 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 export async function getStaticProps(ctx) {
   const slug = ctx.params.slug;
   try {
-    const pagePost = await getPost(slug);
+    const pagePost = await getPost(slug, true);
     return {
       props: {
         post: pagePost.post,

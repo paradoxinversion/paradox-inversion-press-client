@@ -16,8 +16,8 @@ const Index = ({ content, posts }) => {
 };
 export async function getStaticProps() {
   try {
-    const res = await getHomePage();
-    const posts = await queryPosts("all");
+    const res = await getHomePage(true);
+    const posts = await queryPosts("all", undefined, true);
     return {
       props: {
         content: res.page.content.document,
