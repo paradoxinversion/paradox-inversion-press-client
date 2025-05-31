@@ -22,7 +22,7 @@ export async function getStaticPaths() {
   const paths = res.pages.map((page) => ({
     params: { slug: page.url },
   }));
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps(ctx) {

@@ -47,7 +47,7 @@ export default function Page(props) {
 
 export async function getStaticPaths() {
   const allPosts = await getAllPosts();
-  const paths = allPosts.map((post) => {
+  const paths = allPosts.filter((post) => post.series !== null).map((post) => {
     const [year, month, day] = getPostPathParts(post.publishedAt);
     return {
       params: {
@@ -59,7 +59,7 @@ export async function getStaticPaths() {
       },
     };
   });
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps(ctx) {
