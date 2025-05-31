@@ -53,10 +53,10 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
         },
       };
     });
-    return { paths, fallback: false };
+    return { paths, fallback: true };
   } catch(e){
     console.error("Error fetching static paths:", e);
-    return { paths: [], fallback: false };
+    return { paths: [], fallback: true };
   }
 }
 
