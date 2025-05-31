@@ -1,4 +1,5 @@
 import { DocumentRenderer } from "@keystone-6/document-renderer";
+import { GetStaticPathsResult } from "next";
 import { getPage, getPages, getSeriesPosts } from "utils/actions";
 
 export default function Page(props) {
@@ -17,23 +18,42 @@ export default function Page(props) {
   );
 }
 
-export async function getStaticPaths() {
-  const res = await getPages();
-  const paths = res.pages.map((page) => ({
-    params: { slug: page.url },
-  }));
-  return { paths, fallback: false };
+export async function getStaticPaths(): Promise<GetStaticPathsResult>  {
+  try {
+    const res = await getPages();
+    const paths = res.pages.map((page) => ({
+      params: { slug: page.url },
+    }));
+    return { paths, fallback: false };
+  } catch(e){
+    console.error("Error fetching static paths:", e);
+    return { paths: [], fallback: false };
+  }
 }
 
 export async function getStaticProps(ctx) {
-  const res = await getPage(ctx.params.slug);
-  const series = await getSeriesPosts(ctx.params.slug);
-  return {
-    props: {
-      title: res.page.title,
-      content: res.page.content.document,
-      pageType: res.page.pageType,
-      seriesPosts: series.posts
-    },
-  };
+  const slug = ctx.params.slug;
+  try {
+    const res = await getPage(slug);
+    const series = await getSeriesPosts(slug);
+    return {
+      props: {
+        title: res.page.title,
+        content: res.page.content.document,
+        pageType: res.page.pageType,
+        seriesPosts: series.posts
+      },
+    };
+  } catch (e){
+    return {
+      props: {
+        title: undefined,
+        content: undefined,
+        pageType: undefined,
+        seriesPosts: undefined,
+        // Provide error details for debugging
+        error: { name: (e as Error).name, message: (e as Error).message },
+      },
+    }
+  }
 }

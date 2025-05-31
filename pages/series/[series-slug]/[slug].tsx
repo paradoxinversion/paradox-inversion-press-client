@@ -46,29 +46,47 @@ export default function Page(props) {
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllPosts();
-  const paths = allPosts.filter((post) => post.series !== null).map((post) => {
-    const [year, month, day] = getPostPathParts(post.publishedAt);
-    return {
-      params: {
-        slug: post.url,
-        "series-slug": post.series?.url || "",
-        year: year.toString(),
-        month: month.toString(),
-        day: day.toString(),
-      },
-    };
-  });
-  return { paths, fallback: false };
+  try {
+    const allPosts = await getAllPosts();
+    const paths = allPosts.filter((post) => post.series !== null).map((post) => {
+      const [year, month, day] = getPostPathParts(post.publishedAt);
+      return {
+        params: {
+          slug: post.url,
+          "series-slug": post.series?.url || "",
+          year: year.toString(),
+          month: month.toString(),
+          day: day.toString(),
+        },
+      };
+    });
+    return { paths, fallback: false };
+  } catch (e) {
+    console.error("Error fetching static paths:", e);
+    return { paths: [], fallback: false };
+  }
 }
 
 export async function getStaticProps(ctx) {
-  const pagePost = await getPost(ctx.params.slug);
-  const seriesPosts = await getSeriesPosts(pagePost.post.series?.url);
-  return {
-    props: {
-      post: pagePost.post,
-      seriesPosts: seriesPosts.posts || [],
-    },
-  };
+  const slug = ctx.params.slug;
+  try {
+    const pagePost = await getPost(slug);
+    const seriesPosts = await getSeriesPosts(pagePost.post.series?.url);
+    return {
+      props: {
+        post: pagePost.post,
+        seriesPosts: seriesPosts.posts || [],
+      },
+    };
+  } catch (e) {
+    console.error("Error fetching post:", e);
+    return {
+      props: {
+        post: undefined,
+        seriesPosts: [],
+        // Provide error details for debugging
+        error: { name: (e as Error).name, message: (e as Error).message },
+      },
+    };
+  }
 }

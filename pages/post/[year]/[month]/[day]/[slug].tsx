@@ -2,6 +2,7 @@ import { DocumentRenderer } from "@keystone-6/document-renderer";
 import { getAllPosts, getPost, getPostPathParts } from "utils/actions";
 import { DateTime } from "luxon";
 import TagList from "@/components/TagList";
+import { GetStaticPathsResult } from "next";
 
 /**
  * A page component that renders a standalone post.
@@ -37,27 +38,45 @@ export default function Page(props) {
     </div>
   );
 }
-export async function getStaticPaths() {
-  const allPosts = await getAllPosts();
-  const paths = allPosts.map((post) => {
-    const [year, month, day] = getPostPathParts(post.publishedAt);
-    return {
-      params: {
-        slug: post.url,
-        year: year.toString(),
-        month: month.toString(),
-        day: day.toString(),
-      },
-    };
-  });
-  return { paths, fallback: false };
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
+  try {
+
+    const allPosts = await getAllPosts();
+    const paths = allPosts.map((post) => {
+      const [year, month, day] = getPostPathParts(post.publishedAt);
+      return {
+        params: {
+          slug: post.url,
+          year: year.toString(),
+          month: month.toString(),
+          day: day.toString(),
+        },
+      };
+    });
+    return { paths, fallback: false };
+  } catch(e){
+    console.error("Error fetching static paths:", e);
+    return { paths: [], fallback: false };
+  }
 }
 
 export async function getStaticProps(ctx) {
-  const pagePost = await getPost(ctx.params.slug);
-  return {
-    props: {
-      post: pagePost.post,
-    },
-  };
+  const slug = ctx.params.slug;
+  try {
+    const pagePost = await getPost(slug);
+    return {
+      props: {
+        post: pagePost.post,
+      },
+    };
+  } catch (e) {
+    console.error("Error fetching post:", e);
+    return {
+      props: {
+        post: undefined,
+        // Provide error details for debugging
+        error: { name: (e as Error).name, message: (e as Error).message },
+      },
+    };
+  }
 }

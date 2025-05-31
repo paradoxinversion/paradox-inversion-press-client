@@ -15,13 +15,24 @@ const Index = ({ content, posts }) => {
   );
 };
 export async function getStaticProps() {
-  const res = await getHomePage();
-  const posts = await queryPosts("all");
-  return {
-    props: {
-      content: res.page.content.document,
-      posts,
-    },
-  };
+  try {
+    const res = await getHomePage();
+    const posts = await queryPosts("all");
+    return {
+      props: {
+        content: res.page.content.document,
+        posts,
+      },
+    };
+  } catch (e) {
+    console.error("Error fetching static props:", e);
+    return {
+      props: {
+        content: undefined,
+        posts: [],
+        error: { name: (e as Error).name, message: (e as Error).message },
+      },
+    };
+  }
 }
 export default Index;
