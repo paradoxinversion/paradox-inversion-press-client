@@ -20,7 +20,7 @@ export default function Page(props) {
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult>  {
   try {
-    const res = await getPages();
+    const res = await getPages(true);
     const paths = res.pages.map((page) => ({
       params: { slug: page.url },
     }));

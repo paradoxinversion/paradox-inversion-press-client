@@ -41,7 +41,7 @@ export default function Page(props) {
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   try {
 
-    const allPosts = await getAllPosts();
+    const allPosts = await getAllPosts(true);
     const paths = allPosts.map((post) => {
       const [year, month, day] = getPostPathParts(post.publishedAt);
       return {

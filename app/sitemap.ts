@@ -4,8 +4,8 @@ import { formatPostPath, formatSeriesPostPath, getAllPosts, getPages } from 'uti
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
 
-    const pages = await getPages();
-    const posts = await getAllPosts();
+    const pages = await getPages(true);
+    const posts = await getAllPosts(true);
   
     const postsMap = posts.map((post) => {
       if (post.postType === 'series') {
