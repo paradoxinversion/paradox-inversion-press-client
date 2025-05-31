@@ -24,10 +24,10 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult>  {
     const paths = res.pages.map((page) => ({
       params: { slug: page.url },
     }));
-    return { paths, fallback: true };
+    return { paths, fallback: "blocking" };
   } catch(e){
     console.error("Error fetching static paths:", e);
-    return { paths: [], fallback: true };
+    return { paths: [], fallback: "blocking" };
   }
 }
 
