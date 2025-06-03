@@ -8,7 +8,6 @@ import SeriesPartSelect from "@/components/SeriesPartSelect";
  * A page component that renders a series post.
  */
 export default function Page(props) {
-  console.log("Series Props", Object.keys(props).length);
   const propsReady = !!Object.keys(props).length;
   if (!propsReady){
     return <div>Not ready</div>
