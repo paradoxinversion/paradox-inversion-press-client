@@ -7,7 +7,7 @@ export default function PostTeaserList({ posts }) {
       <PostTeaserListHeader
         customHeaderText={"foo"}
       />
-      {posts.map((post) => (
+      {posts.sort((postA, postB) => postA.publishedAt.localeCompare(postB.publishedAt)).map((post) => (
         <PostTeaser key={post.id} post={post} />
       ))}
     </div>
