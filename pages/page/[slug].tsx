@@ -12,7 +12,11 @@ export default function Page(props) {
         The world is not so simple
       </p>
       <div className="pi-content">
-        <DocumentRenderer document={props.content} />
+        {props.content ? (
+          <DocumentRenderer document={props.content} />
+        ) : (
+          <p className="text-center">Content not available</p>
+        )}
       </div>
     </div>
   );

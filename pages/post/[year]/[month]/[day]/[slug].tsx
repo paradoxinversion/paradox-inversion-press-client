@@ -8,6 +8,10 @@ import { GetStaticPathsResult } from "next";
  * A page component that renders a standalone post.
  */
 export default function Page(props) {
+  const propsReady = !!Object.keys(props).length;
+  if (!propsReady){
+    return <div>Not ready</div>
+  }
   return (
     <div>
       <h1 className="pi-header--text">{props.post.title}</h1>
