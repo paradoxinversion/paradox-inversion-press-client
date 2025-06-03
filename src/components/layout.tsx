@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Logo from "./Logo";
 import MainFooter from "./MainFooter";
-import { getPages } from "utils/actions";
 import Sidebar from "./Sidebar";
 
 const Layout = ({ children, pageData }) => {
