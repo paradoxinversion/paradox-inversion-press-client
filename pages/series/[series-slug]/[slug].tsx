@@ -60,10 +60,10 @@ export async function getStaticPaths() {
         },
       };
     });
-    return { paths, fallback: "blocking" };
+    return { paths, fallback: true };
   } catch (e) {
     console.error("Error fetching static paths:", e);
-    return { paths: [], fallback: "blocking" };
+    return { paths: [], fallback: true };
   }
 }
 
