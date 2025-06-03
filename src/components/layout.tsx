@@ -4,17 +4,17 @@ import MainFooter from "./MainFooter";
 import { getPages } from "utils/actions";
 import Sidebar from "./Sidebar";
 
-const Layout = ({ children }) => {
-  const [pageData, setPageData] = useState([]);
-  useEffect(() => {
-    console.log("Fetching pages data...");
-    getPages().then((res) => {
-      setPageData(res.pages);
-      console.log("Pages data fetched:", pageData);
-    }).catch((error) => {
-      console.error("Error fetching pages:", error);
-    });
-  }, []);
+const Layout = ({ children, pageData }) => {
+  // const [pageData, setPageData] = useState([]);
+  // useEffect(() => {
+  //   console.log("Fetching pages data...");
+  //   getPages().then((res) => {
+  //     setPageData(res.pages);
+  //     console.log("Pages data fetched:", res.pages);
+  //   }).catch((error) => {
+  //     console.error("Error fetching pages:", error);
+  //   });
+  // }, []);
 
   return (
     <div className="flex flex-col min-h-screen p-4">
