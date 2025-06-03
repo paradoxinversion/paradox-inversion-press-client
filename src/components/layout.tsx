@@ -7,8 +7,12 @@ import Sidebar from "./Sidebar";
 const Layout = ({ children }) => {
   const [pageData, setPageData] = useState([]);
   useEffect(() => {
+    console.log("Fetching pages data...");
     getPages().then((res) => {
       setPageData(res.pages);
+      console.log("Pages data fetched:", pageData);
+    }).catch((error) => {
+      console.error("Error fetching pages:", error);
     });
   }, []);
 
