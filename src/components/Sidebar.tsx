@@ -3,7 +3,7 @@ import SidebarNavButton from "./SidebarNavButton";
 
 const Sidebar = ({ pages }) => {
   return (
-    <div id="sidebar" className="sidebar max-w-48 min-w-48 ">
+    <div id="sidebar" className="container flex overflow-x-auto md:sidebar md:max-w-48 md:min-w-48 md:flex-col ">
       {pages ? (
         pages
           .filter((page) => page.showInNav)
