@@ -14,6 +14,7 @@ query Pages {
     title
     showInNav
     url
+    barcode
     storyCollection {
       url
     }
@@ -37,6 +38,7 @@ query Page($where: PageWhereUniqueInput!) {
     url
     title
     pageType
+    barcode
     content {
       document
     }

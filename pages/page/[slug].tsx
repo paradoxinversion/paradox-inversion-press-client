@@ -10,7 +10,7 @@ export default function Page(props) {
         {props.title}
       </h1>
       <p className="barcode text-center sm:text-left">
-        The world is not so simple
+        {props.barcode || "The world is not so simple"}
       </p>
       <div className="pi-content">
         {props.content ? (
@@ -52,7 +52,8 @@ export async function getStaticProps(ctx) {
         title: res.page.title,
         content: res.page.content.document,
         pageType: res.page.pageType,
-        seriesPosts: series.posts
+        seriesPosts: series.posts,
+        barcode: res.page.barcode,
       },
       revalidate: 60, // Revalidate every 60 seconds
     };
@@ -63,6 +64,7 @@ export async function getStaticProps(ctx) {
         content: undefined,
         pageType: undefined,
         seriesPosts: undefined,
+        barcode: undefined,
         // Provide error details for debugging
         error: { name: (e as Error).name, message: (e as Error).message },
       },
