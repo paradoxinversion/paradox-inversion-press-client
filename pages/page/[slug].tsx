@@ -1,3 +1,4 @@
+import PostTeaserList from "@/components/PostTeaserList";
 import { DocumentRenderer } from "@keystone-6/document-renderer";
 import { GetStaticPathsResult } from "next";
 import { getPage, getPages, getSeriesPosts } from "utils/actions";
@@ -17,6 +18,12 @@ export default function Page(props) {
         ) : (
           <p className="text-center">Content not available</p>
         )}
+      </div>
+      <div>
+        {props.pageType === "series" && props.seriesPosts && props.seriesPosts.length > 0 ? (
+          <div className="pi-series-posts">
+            <PostTeaserList posts={props.seriesPosts} />
+          </div>) : null}
       </div>
     </div>
   );
