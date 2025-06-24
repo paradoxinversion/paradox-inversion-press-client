@@ -32,6 +32,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/',
       }
     ],
-    sitemap: `${process.env.NEXT_PUBLIC_HOST_URL}/sitemap.xml`,
+    sitemap: `https://${process.env.NEXT_PUBLIC_HOST_URL}/sitemap.xml`,
   }
 }
