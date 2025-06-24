@@ -7,7 +7,9 @@ export default function PostTeaserList({ posts }) {
       <PostTeaserListHeader
         customHeaderText={"foo"}
       />
-      {posts.sort((postA, postB) => (postA.publishedAt < postB.publishedAt) ? 1 : ((postA.publishedAt > postB.publishedAt) ? 1 : 0)).map((post) => (
+      {posts.sort((postA, postB) => (
+        new Date(postA.publishedAt) > new Date(postB.publishedAt) ? -1 : 1
+      )).map((post) => (
         <PostTeaser key={post.id} post={post} />
       ))}
     </div>
