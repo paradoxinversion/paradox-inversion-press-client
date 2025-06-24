@@ -3,6 +3,7 @@ import { getAllPosts, getPost, getPostPathParts } from "utils/actions";
 import { DateTime } from "luxon";
 import TagList from "@/components/TagList";
 import { GetStaticPathsResult } from "next";
+import Head from "next/head";
 
 /**
  * A page component that renders a standalone post.
@@ -14,6 +15,15 @@ export default function Page(props) {
   }
   return (
     <div>
+      <Head>
+        <title>{props.post.title}</title>
+        <meta property="og:title" content={props.post.title} key="title" />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:description"
+          content={props.post.brief || "Check it out on Paradox Inversion Press!"}
+        />
+      </Head>
       <h1 className="pi-header--text">{props.post.title}</h1>
       {props.post.author && <p>By {props.post.author.displayName}</p>}
       <p className="italic mb-4">

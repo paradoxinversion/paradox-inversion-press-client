@@ -102,7 +102,7 @@ query Post($where: PostWhereUniqueInput!) {
       url
       seriesPostsCount
     }
-
+    brief
   }
 }
   `;
