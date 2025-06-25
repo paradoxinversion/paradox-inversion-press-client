@@ -3,6 +3,7 @@ import "../style/style.css";
 import "../style/pistyle.css";
 import { useEffect, useState } from "react";
 import { getPages } from "utils/actions";
+import { GoogleAnalytics } from '@next/third-parties/google'
 export default function MyApp({ Component, pageProps }) {
   const [pageData, setPageData] = useState([]);
     useEffect(() => {
@@ -15,6 +16,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <Layout pageData={pageData}>
       <Component {...pageProps} />
+      <GoogleAnalytics gaId="G-ERTVKBNYH9" />
     </Layout>
   );
 }
